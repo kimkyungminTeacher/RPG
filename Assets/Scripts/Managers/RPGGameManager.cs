@@ -7,6 +7,7 @@ public class RPGGameManager : MonoBehaviour
 {
     public static RPGGameManager sharedInstance = null;
     public SpawnPoint playerSpawnPoint;
+    public RPGCameraManager cameraManager;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class RPGGameManager : MonoBehaviour
             Debug.LogError("SpawnPlayer is null");
             return;
         }
-        playerSpawnPoint.SpawnObject();
+        GameObject player = playerSpawnPoint.SpawnObject();
+        cameraManager.virtualCamera.Follow = player.transform;
     }
 }

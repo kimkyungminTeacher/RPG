@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : Character
 {
+    public HitPoints hitPoints;
     public HealthBar healthBarPrefab;
     HealthBar healthBar;
 
@@ -14,9 +15,10 @@ public class Player : Character
     private void Start()
     {
         hitPoints.value = startingHitPoints;
+
         healthBar = Instantiate(healthBarPrefab);
-        healthBar.character = this;
         inventory = Instantiate(inventoryPrefab);
+        healthBar.character = this;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,5 +48,44 @@ public class Player : Character
             hitPoints.value = maxHitPoints;
         }
         print("추가되는 체력 값 : " + quantity + ". 새로운 체력값 : " + hitPoints.value);
+    }
+
+    public override IEnumerator DamageCharacter(int damage, float interval)
+    {
+        while (true)
+        {
+            hitPoints.value -= damage;
+            if (hitPoints.value <= float.Epsilon)
+            {
+                KillCharacter();
+                break;
+            }
+
+            if (interval > float.Epsilon)
+            {
+                yield return new WaitForSeconds(interval);
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    public override void KillCharacter()
+    {
+        base.KillCharacter();
+
+        Destroy(healthBar.gameObject);
+        Destroy(inventory.gameObject);
+    }
+
+    public override void ResetCharacter()
+    {
+        Start();
+    }
+
+    private void OnEnable()
+    {
+        ResetCharacter();
     }
 }

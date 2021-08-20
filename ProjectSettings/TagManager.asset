@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - CanBePickUp
+  - VirtualCamera
   layers:
   - Default
   - TransparentFX
