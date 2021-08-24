@@ -5,6 +5,8 @@ using UnityEngine;
 public class Enemy : Character
 {
     float hitPoints;
+    public int damageStength;
+    Coroutine coroutine = null;
 
     public override IEnumerator DamageCharacter(int damage, float interval)
     {
@@ -36,5 +38,27 @@ public class Enemy : Character
     private void OnEnable()
     {
         ResetCharacter();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Player player = collision.gameObject.GetComponent<Player>();
+            if (coroutine == null)
+            {
+                //StartCoroutine 실행된 적이 없다.
+                coroutine = StartCoroutine(player.DamageCharacter(damageStength, 1.0f));
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
     }
 }
