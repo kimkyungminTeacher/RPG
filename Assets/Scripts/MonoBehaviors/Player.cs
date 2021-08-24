@@ -74,6 +74,9 @@ public class Player : Character
 
     public override void KillCharacter()
     {
+        if (gameObject == null)
+            return;
+
         base.KillCharacter();
 
         Destroy(healthBar.gameObject);
@@ -85,8 +88,10 @@ public class Player : Character
         Start();
     }
 
+    /*
     private void OnEnable()
     {
         ResetCharacter();
     }
+    */
 }
