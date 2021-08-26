@@ -77,7 +77,6 @@ public class Wander : MonoBehaviour
         {
             currentSpeed = pursuitSpeed;
             animator.SetBool("isWalking", true);
-
             if (moveCoroutine != null)
             {
                 StopCoroutine(moveCoroutine);
@@ -93,7 +92,6 @@ public class Wander : MonoBehaviour
         {
             currentSpeed = wanderSpeed;
             animator.SetBool("isWalking", false);
-
             if (moveCoroutine != null)
             {
                 StopCoroutine(moveCoroutine);
