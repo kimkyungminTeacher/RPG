@@ -58,10 +58,23 @@ public class Wander : MonoBehaviour
 
     private IEnumerator Move()
     {
-        while (true)
+        float remainDistance = (transform.position - endPosition).sqrMagnitude;
+        while (remainDistance > float.Epsilon)
         {
+            if (targetTransform != null)
+            {
+                endPosition = targetTransform.position;
+            }
+            animator.SetBool("isWalking", true);
+
+            Vector3 newPosition = Vector3.MoveTowards(rb2d.position, endPosition, 
+                                                    currentSpeed * Time.deltaTime);
+            rb2d.MovePosition(newPosition);
+
+            remainDistance = (transform.position - endPosition).sqrMagnitude;
             yield return new WaitForFixedUpdate();
         }
+        animator.SetBool("isWalking", false);
     }
 
     private Vector3 ChooseNewEndposition()
