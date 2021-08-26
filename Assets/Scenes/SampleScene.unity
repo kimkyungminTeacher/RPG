@@ -140,11 +140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293798939567124491, guid: 0b62cabe5a7388d4bac101980142a254, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.82
+      value: -3.32
       objectReference: {fileID: 0}
     - target: {fileID: 293798939567124491, guid: 0b62cabe5a7388d4bac101980142a254, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.131
+      value: -2.53
       objectReference: {fileID: 0}
     - target: {fileID: 293798939567124491, guid: 0b62cabe5a7388d4bac101980142a254, type: 3}
       propertyPath: m_LocalPosition.z
@@ -177,18 +177,6 @@ PrefabInstance:
     - target: {fileID: 293798939567124491, guid: 0b62cabe5a7388d4bac101980142a254, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1435872780861385838, guid: 0b62cabe5a7388d4bac101980142a254, type: 3}
-      propertyPath: wanderSpeed
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1435872780861385838, guid: 0b62cabe5a7388d4bac101980142a254, type: 3}
-      propertyPath: pursuitSpeed
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1435872780861385838, guid: 0b62cabe5a7388d4bac101980142a254, type: 3}
-      propertyPath: directionChangeInterval
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b62cabe5a7388d4bac101980142a254, type: 3}
@@ -4875,7 +4863,7 @@ PrefabInstance:
       objectReference: {fileID: 293798939567124488, guid: 0b62cabe5a7388d4bac101980142a254, type: 3}
     - target: {fileID: 7935347857946557468, guid: ebd095570dfbb8a47b808f84db499763, type: 3}
       propertyPath: repeatInterval
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebd095570dfbb8a47b808f84db499763, type: 3}
