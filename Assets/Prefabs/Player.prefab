@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 1179476658166451972}
   - component: {fileID: 1179476658166451975}
   - component: {fileID: 1179476658166451973}
+  - component: {fileID: 1134417350796930071}
   - component: {fileID: 1179476658166451970}
   - component: {fileID: 911934021}
   - component: {fileID: 3579964865464638294}
+  - component: {fileID: 2360513572932709202}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -132,6 +134,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5568297, y: 0.8546983}
   m_EdgeRadius: 0
+--- !u!114 &1134417350796930071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179476658166452089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba084795a87bcaf429556550824abc67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoPrefab: {fileID: 0}
+  poolSize: 7
 --- !u!50 &1179476658166451970
 Rigidbody2D:
   serializedVersion: 4
@@ -178,8 +194,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b31a08f7d13ca438ec176b77e2f9cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: {fileID: 11400000, guid: bc3e26be74b0f0944a9b04ed925aaa7c, type: 2}
   maxHitPoints: 10
   startingHitPoints: 5
+  hitPoints: {fileID: 11400000, guid: bc3e26be74b0f0944a9b04ed925aaa7c, type: 2}
   healthBarPrefab: {fileID: 2229013509763392853, guid: 40375f582bdfd494db48f00654b9c0ce, type: 3}
   inventoryPrefab: {fileID: -5989152798884166128, guid: 60f078bcf52b9094dbf45a979f87bbf0, type: 3}
+--- !u!114 &2360513572932709202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179476658166452089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba084795a87bcaf429556550824abc67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoPrefab: {fileID: 750951438901442156, guid: d97ca0d7c1e7f814a92a8e16cb049234, type: 3}
+  poolSize: 7

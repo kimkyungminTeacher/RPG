@@ -6,7 +6,7 @@ public class Wander : MonoBehaviour
     public float pursuitSpeed;
     public float wanderSpeed;
     float currentSpeed;
-    //float currentAngle;
+    float currentAngle;
 
     public float directionChangeInterval;
 
@@ -79,7 +79,8 @@ public class Wander : MonoBehaviour
 
     private Vector3 ChooseNewEndposition()
     {
-        float currentAngle = Random.Range(0, 360);
+        currentAngle += Random.Range(0, 20);
+        currentAngle %= 360;
         float inputAngleRadians = currentAngle * Mathf.Deg2Rad;
         return new Vector3(Mathf.Cos(inputAngleRadians), Mathf.Sin(inputAngleRadians), 0);
     }
