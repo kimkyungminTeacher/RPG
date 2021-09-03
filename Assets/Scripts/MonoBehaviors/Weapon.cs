@@ -14,6 +14,10 @@ public class Weapon : MonoBehaviour
     float positiveSlope;
     float negativeSlope;
 
+    bool isFiring;
+    [HideInInspector]
+    public Animator animator;
+
     enum Quadrant
     {
         East, 
@@ -35,6 +39,8 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         localCamera = Camera.main;
+        isFiring = false;
+        animator = GetComponent<Animator>();
         
         Vector2 lowerLeft = localCamera.ScreenToWorldPoint(new Vector2(0, 0));
         Vector2 upperRight = localCamera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
@@ -99,11 +105,51 @@ public class Weapon : MonoBehaviour
         }
     }
 
-        private void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            isFiring = true;
             FireAmmo();
+        }
+
+        UpdateState();
+    }
+
+    private void UpdateState()
+    {
+        if (isFiring)
+        {
+            Vector2 qVector;
+            Quadrant quadrant = GetQuadrant();
+            switch(quadrant)
+            {
+                case Quadrant.East:
+                    qVector = new Vector2(1.0f, 0.0f);
+                    break;
+                case Quadrant.South:
+                    qVector = new Vector2(0.0f, -1.0f);
+                    break;
+                case Quadrant.West:
+                    qVector = new Vector2(-1.0f, 0.0f);
+                    break;
+                case Quadrant.North:
+                    qVector = new Vector2(0.0f, 1.0f);
+                    break;
+                default:
+                    qVector = new Vector2(0.0f, 0.0f);
+                    break;
+            }
+
+            animator.SetBool("isFiring", true);
+            animator.SetFloat("fireXDir", qVector.x);
+            animator.SetFloat("fireYDir", qVector.y);
+
+            isFiring = false;
+        }
+        else
+        {
+            animator.SetBool("isFiring", false);
         }
     }
 
