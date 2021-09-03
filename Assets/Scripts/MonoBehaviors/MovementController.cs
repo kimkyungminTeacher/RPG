@@ -11,17 +11,8 @@ public class MovementController : MonoBehaviour
     Rigidbody2D rb2D;
 
     Animator animator;
-    string animationState = "AnimationState";
 
-    enum CharStates
-    {
-        walkEast = 1, 
-        walkSouth = 2, 
-        walkWest = 3,
-        walkNorth = 4, 
-        idleSouth = 5
-    }
-
+    
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -35,26 +26,18 @@ public class MovementController : MonoBehaviour
 
     private void UpdateState()
     {
-        if (movement.x > 0)
+        //movement.x == 0 && movement.y == 0
+        if (Mathf.Approximately(movement.x, 0) && Mathf.Approximately(movement.y, 0))
         {
-            animator.SetInteger(animationState, (int)CharStates.walkEast);
-        } 
-        else if (movement.x < 0)
-        {
-            animator.SetInteger(animationState, (int)CharStates.walkWest);
-        }
-        else if (movement.y > 0)
-        {
-            animator.SetInteger(animationState, (int)CharStates.walkNorth);
-        }
-        else if (movement.y < 0)
-        {
-            animator.SetInteger(animationState, (int)CharStates.walkSouth);
+            animator.SetBool("isWalking", false);
         } 
         else
         {
-            animator.SetInteger(animationState, (int)CharStates.idleSouth);
+            animator.SetBool("isWalking", true);
         }
+
+        animator.SetFloat("xDir", movement.x);
+        animator.SetFloat("yDir", movement.y);
     }
 
     void FixedUpdate()

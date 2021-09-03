@@ -9,6 +9,18 @@ public class Weapon : MonoBehaviour
     public int poolSize = 7;
     static List<GameObject> ammoPool = new List<GameObject>();
     public float weaponVelocity = 2;
+    Camera localCamera;
+
+    float positiveSlope;
+    float negativeSlope;
+
+    enum Quadrant
+    {
+        East, 
+        South, 
+        West,
+        North
+    }
 
     private void Awake()
     {
@@ -20,7 +32,74 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Start()
+    {
+        localCamera = Camera.main;
+        
+        Vector2 lowerLeft = localCamera.ScreenToWorldPoint(new Vector2(0, 0));
+        Vector2 upperRight = localCamera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        Vector2 upperLeft = localCamera.ScreenToWorldPoint(new Vector2(0, Screen.height));
+        Vector2 lowerRight = localCamera.ScreenToWorldPoint(new Vector2(Screen.width, 0));
+
+        positiveSlope = GetSlope(lowerLeft, upperRight);
+        negativeSlope = GetSlope(upperLeft, lowerRight);
+    }
+
+    bool HighterThanPositiveSlopeLine(Vector2 inputPosition)
+    {
+        Vector2 playerPosition = gameObject.transform.position;
+        Vector2 mousePosition = localCamera.ScreenToWorldPoint(inputPosition);
+
+        //b = y - mx
+        float playerIntercept 
+            = playerPosition.y - (positiveSlope * playerPosition.x);
+        float mouseIntercept
+            = mousePosition.y - (positiveSlope * mousePosition.x);
+
+        return playerIntercept < mouseIntercept;
+    }
+
+    bool HigherThanNegativeSlopeLine(Vector2 inputPosition)
+    {
+        Vector2 playerPostion = gameObject.transform.position;
+        Vector2 mousePosition 
+            = localCamera.ScreenToWorldPoint(inputPosition);
+
+        //b = y - mx
+        float playerIntercept
+            = playerPostion.y - (negativeSlope * playerPostion.x);
+        float mouseIntercept
+            = mousePosition.y - (negativeSlope * mousePosition.y);
+
+        return playerIntercept < mouseIntercept;
+    }
+
+    Quadrant GetQuadrant()
+    {
+        bool highterThanPos
+            = HighterThanPositiveSlopeLine(Input.mousePosition);
+        bool higherThanNega
+            = HigherThanNegativeSlopeLine(Input.mousePosition);
+
+        if (highterThanPos == false && higherThanNega == true)
+        {
+            return Quadrant.East;
+        }
+        else if (highterThanPos == false && higherThanNega == false)
+        {
+            return Quadrant.South;
+        }
+        else if (highterThanPos == true && higherThanNega == false)
+        {
+            return Quadrant.West;
+        }
+        else
+        {
+            return Quadrant.North;
+        }
+    }
+
+        private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -58,4 +137,10 @@ public class Weapon : MonoBehaviour
     {
         ammoPool = null;
     }
+
+    float GetSlope(Vector2 pointOne, Vector2 pointTwo)
+    {
+        return (pointTwo.y - pointOne.y) / (pointTwo.x - pointOne.x);
+    }
+
 }

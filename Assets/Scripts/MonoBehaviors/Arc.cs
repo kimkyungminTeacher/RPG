@@ -13,6 +13,10 @@ public class Arc : MonoBehaviour
         {
             percentComplete += Time.deltaTime / duration;
             transform.position = Vector3.Lerp(startPosition, destination, percentComplete);
+
+            Debug.Log("TravelArc percentComplete : " + percentComplete + 
+                    ", transform.position.x : " + transform.position.x);
+
             yield return null;
         }
         gameObject.SetActive(false);
