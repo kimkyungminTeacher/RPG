@@ -55,6 +55,7 @@ public class Player : Character
         while (true)
         {
             hitPoints.value -= damage;
+            StartCoroutine(FlickerCharacter());
             if (hitPoints.value <= float.Epsilon)
             {
                 KillCharacter();

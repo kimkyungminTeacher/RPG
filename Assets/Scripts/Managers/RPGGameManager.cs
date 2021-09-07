@@ -41,4 +41,12 @@ public class RPGGameManager : MonoBehaviour
         GameObject player = playerSpawnPoint.SpawnObject();
         cameraManager.virtualCamera.Follow = player.transform;
     }
+
+    private void Update()
+    {
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+    }
 }

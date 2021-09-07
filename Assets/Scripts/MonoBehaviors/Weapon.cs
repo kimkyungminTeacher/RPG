@@ -75,7 +75,7 @@ public class Weapon : MonoBehaviour
         float playerIntercept
             = playerPostion.y - (negativeSlope * playerPostion.x);
         float mouseIntercept
-            = mousePosition.y - (negativeSlope * mousePosition.y);
+            = mousePosition.y - (negativeSlope * mousePosition.x);
 
         return playerIntercept < mouseIntercept;
     }
