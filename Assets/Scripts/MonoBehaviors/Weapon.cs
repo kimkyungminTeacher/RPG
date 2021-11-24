@@ -30,6 +30,7 @@ public class Weapon : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
+            Debug.Log("Awake : ammoPrefab : " + ammoPrefab);
             GameObject ammoObject = Instantiate(ammoPrefab);
             ammoObject.SetActive(false);
             ammoPool.Add(ammoObject);
